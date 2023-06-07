@@ -203,6 +203,16 @@ const resetText = async () => {
     
 }
 
+const resetTry = async () => { 
+    await delay(3000);
+    firstTile = null
+    secondTile = null
+    firstTileID = null
+    secondTileID = null
+}
+
+
+
 
     giveColor()   //invokes function to assign each tile a color
     coverTiles()  
@@ -243,13 +253,13 @@ const resetText = async () => {
 
                 if(firstTile != null && firstTile === secondTile && firstTileID !== secondTileID ){
                     console.log("this is the index of your color " + colorsArr.indexOf(firstTile))
-
+                    
                      document.getElementById('result').innerHTML ='match found'
                     resetText()
+                    resetTry()
                     // switch(colorsArr.tofind(firstTile))
 
-                    firstTile = null
-                    secondTile = null
+                    
                 }
                 else if (firstTile != null && secondTile != null){
                     console.log('wait for reset');
@@ -276,7 +286,11 @@ const resetText = async () => {
     }
 
     
+    
 
+
+    //issue #1 : once matched ,yyou can instantly choose two more tiles ? small bug
+    //issue #2 : if chossenn one of the matched tiles, first or second choice. it changed both options to black,how to aoid the matched tile reverting to black
 
 
     //  do{
