@@ -212,11 +212,11 @@ function giveColor(){
 
                 if(firstTileID === secondTileID){
                     console.log('clicked on same tile twice,try again')
-                    firstTile = null
-                    secondTile = null
+                    
+                    
                 }
 
-                if(firstTile != null & firstTile === secondTile){
+                if(firstTile != null && firstTile === secondTile && firstTileID !== secondTileID ){
                     console.log("this is the index of your color " + colorsArr.indexOf(firstTile))
 
                     console.log('match found')
