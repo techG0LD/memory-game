@@ -183,6 +183,27 @@ function giveColor(){
                     // await delay(5000);             // console.log("Waited an additional 5s");
     };
 
+    const resetTile = async () => { 
+        await delay(3000);
+        console.log("Waited 3s");
+        document.getElementById(firstTileID).style.backgroundColor = 'black'
+        
+            firstTile = null
+            secondTile = null
+            firstTileID = null
+            secondTileID = null
+                // await delay(5000);             // console.log("Waited an additional 5s");
+};
+
+const resetText = async () => { 
+    await delay(3000);
+    document.getElementById('result').innerHTML = ''
+    document.getElementById('caption').innerHTML = " "
+    document.getElementById('caption2').innerHTML = " "
+    
+}
+
+
     giveColor()   //invokes function to assign each tile a color
     coverTiles()  
 
@@ -198,20 +219,24 @@ function giveColor(){
             
             // document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
 
+            
+
             if (firstTile === null && secondTile === null ) {
                 document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
                 firstTile = listOfObjTiles[i].color;  
                 firstTileID = listOfObjTiles[i].id;
-                console.log('you choose ' + firstTile + " as your first tile")
+                document.getElementById('caption').innerHTML = 'you choose ' + firstTile + " as your first tile"
             } 
+
+
             else if(secondTile == null){
                 document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
                 secondTile = listOfObjTiles[i].color
                 secondTileID = listOfObjTiles[i].id
-                console.log('you choose ' + secondTile + " as your second tile")
+                document.getElementById('caption2').innerHTML = 'you choose ' + secondTile + " as your second tile"
 
                 if(firstTileID === secondTileID){
-                    console.log('clicked on same tile twice,try again')
+                    document.getElementById('caption2').innerHTML ='clicked on same tile twice,try again'
                     
                     
                 }
@@ -219,8 +244,8 @@ function giveColor(){
                 if(firstTile != null && firstTile === secondTile && firstTileID !== secondTileID ){
                     console.log("this is the index of your color " + colorsArr.indexOf(firstTile))
 
-                    console.log('match found')
-                    
+                     document.getElementById('result').innerHTML ='match found'
+                    resetText()
                     // switch(colorsArr.tofind(firstTile))
 
                     firstTile = null
@@ -228,9 +253,10 @@ function giveColor(){
                 }
                 else if (firstTile != null && secondTile != null){
                     console.log('wait for reset');
+                    
 
-                    console.log('not matched,try again')
-
+                     document.getElementById('result').innerHTML = 'not matched,try again'
+                    resetText()
                     //try to delay time before changing both tiles to black,maybe using a async function instead of hardcoding.passing in the tiles's ID as parameters
 
                     resetTiles();
@@ -243,7 +269,7 @@ function giveColor(){
                 }
             }
 
-         })
+         })  //end of eventlister click
         
         console.log(listOfObjTiles[i].color)      //loop to figure out the color of each tile
         
