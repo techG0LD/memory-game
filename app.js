@@ -13,7 +13,7 @@ let foundArr=[]
 */
 
 
-let gameDone = 0
+let gameDone = 0;
 
 let choiceCount = 0;
 
@@ -66,6 +66,16 @@ function coverTiles(){
 }
 
 
+function soundEffect() {
+    var audio = document.getElementById("audio");
+    audio.play();
+}
+
+
+function winSoundEffect() {
+    var audio = document.getElementById("audio2");
+    audio2.play();
+}
 
 
 //give every tile a color property 
@@ -181,6 +191,8 @@ function giveColor(){
 }
 
 
+
+
 const resetTiles = async () => { 
     await delay(3000);
     console.log("Waited 3s");
@@ -192,11 +204,11 @@ const resetTiles = async () => {
     secondTileID = null
 }
 
-const resetTile = async (ID) => { 
+const resetTile = async (id) => { 
     await delay(3000);
     console.log("Waited 3s");
     
-    document.getElementById(ID).style.backgroundColor = 'black'
+    document.getElementById(id).style.backgroundColor = 'black'
     firstTile = null
     secondTile = null
     firstTileID = null
@@ -233,15 +245,18 @@ console.log(pair0)
     
 for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a click function 
     document.getElementById(listOfObjTiles[i].id).addEventListener('click',function(){
+        
     if (firstTile === null && secondTile === null ) {
         document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
         firstTile = listOfObjTiles[i].color;  
         firstTileID = listOfObjTiles[i].id;
         document.getElementById('caption').innerHTML = 'First Tile: ' + firstTile.toUpperCase()
-    
+    soundEffect();
     console.log(listOfObjTiles[i].color)
     } 
     else if(secondTile == null){
+        soundEffect();
+        choiceCount++
     document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
     secondTile = listOfObjTiles[i].color
     secondTileID = listOfObjTiles[i].id
@@ -285,20 +300,22 @@ for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a
             resetTry()
             gameDone++
             if(gameDone >= 8){
-               document.getElementById('result').innerHTML = "YOU WIN!!"
+                // let playAgain = document.createElement('a');     try to add a anchor element to reload the game
+                // playAgain.href = 'index.html' 
+                // playAgain.textContent = "Play Again"
+                winSoundEffect()
+                document.getElementById('caption').innerHTML = "Thank you for Playing! Can you solve the tile game in less rounds?"
+                document.getElementById('caption2').innerHTML = "Round: " + choiceCount
+                document.getElementById('result').innerHTML = "YOU WIN!!"
             }
             else {resetText()}
          
         
         }
         
-           
-            
         } else  if (firstTile != null && secondTile != null && firstTile !== secondTile ) {
             console.log('wait for reset');
             console.log(secondTile)
-          
-            
             
             
 
