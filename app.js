@@ -323,12 +323,29 @@ for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a
             if(foundArr.includes(secondTileID) || foundArr.includes(firstTileID)){
 
                 if(foundArr.includes(firstTileID)){
-                    document.getElementById('result').innerHTML = `Result: First Tile has been Found,Try Again!`
-                    resetTile(secondTileID)
+                    // document.getElementById('result').innerHTML = `Result: First Tile has been Found,Try Again!`
+                    if(foundArr.includes(secondTileID)){
+                        document.getElementById('result').innerHTML = `Result: Both Tiles has been Found,Try Again!`
+                        resetTry()
+                    }else{
+                        document.getElementById('result').innerHTML = `Result: First Tile has been Found,Try Again!`
+                        resetTile(secondTileID)
+                        resetTry
+                    }
+                    
                 }
-                else{
-                    resetTile(firstTileID)
+                else if (foundArr.includes(secondTileID)) {
                     document.getElementById('result').innerHTML = `Result: Second Tile has been Found,Try Again!`
+
+                    if(foundArr.includes(firstTileID)){
+                        resetTry()
+
+                    } else {
+                        resetTile(firstTileID)
+                        resetTry()
+                    }
+                    
+                    
                 }
 
                 //this was my first algorimth ,which looped through the objects array to find objects that has matching IDs to the foundArray elements(IDs)
