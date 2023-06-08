@@ -258,14 +258,14 @@ for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a
     if(firstTileID === secondTileID){
 
         if(listOfObjTiles[i].found == true) {
-            document.getElementById('caption2').innerHTML ='clicked on same tile twice that was found,try again'
-            document.getElementById('result').innerHTML = 'not matched,try again'
+            document.getElementById('caption2').innerHTML ='Second Tile: clicked on same tile, but this tile has been found'
+            document.getElementById('result').innerHTML = 'Result: Try Again!'
             resetText()
             resetTry()
         }
         else {
-            document.getElementById('caption2').innerHTML ='clicked on same tile twice,try again'
-            document.getElementById('result').innerHTML = 'not matched,try again'
+            document.getElementById('caption2').innerHTML ='Second Tile: clicked on same tile'
+            document.getElementById('result').innerHTML = 'Result: Try Again!'
             resetTiles()
             resetText()
         }
@@ -275,7 +275,7 @@ for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a
     else if(firstTile != null && firstTile === secondTile && firstTileID !== secondTileID ){
         console.log("this is the index of your color " + colorsArr.indexOf(firstTile))
         
-        document.getElementById('result').innerHTML ='match found'
+        document.getElementById('result').innerHTML ='Result: Match Found!!'
 
         for (let j = 0;j<listOfObjTiles.length;j++){
             if (listOfObjTiles[j].color == firstTile){
@@ -294,42 +294,51 @@ for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a
           
             
             
-            document.getElementById('result').innerHTML = 'not matched,try again'
+            
+
+            //this if else statment checks if any of the tiles have already been found/matched
             if(foundArr.includes(secondTileID) || foundArr.includes(firstTileID)){
-              for(let j = 0;j<listOfObjTiles.length;j++){
-                if(foundArr.includes(listOfObjTiles[j].id)){
-                    
+
+                if(foundArr.includes(firstTileID)){
+                    document.getElementById('result').innerHTML = `Result: First Tile has been Found,Try Again!`
+                    resetTile(secondTileID)
                 }
                 else{
-                    resetTile(listOfObjTiles[j].id)
+                    resetTile(firstTileID)
+                    document.getElementById('result').innerHTML = `Result: Second Tile has been Found,Try Again!`
                 }
 
-              } 
-              resetText(); 
+                //this was my first algorimth ,which looped through the objects array to find objects that has matching IDs to the foundArray elements(IDs)
+                // in order to avoid reverting back to deafult color
+                //   for(let j = 0;j<listOfObjTiles.length;j++){
+                //     if(foundArr.includes(listOfObjTiles[j].id)){
+                        
+                //     }
+                //     else{
+                //         resetTile(listOfObjTiles[j].id)
+                //     }
+
+                //   } 
+                
+                resetText(); 
             }
-            
+            //else condition is met if neither choosen tile has been found/match
             else{
-               resetText();
-            
-            resetTiles(); 
+                document.getElementById('result').innerHTML = 'Result: No Match ):'
+                resetText();
+                resetTiles();
+                
             }
             
                 
             
             
         }
-        else {
-            console.log('underworld')
-        }
-        
-        
         }
 
     })  //end of eventlister click
 
-console.log(listOfObjTiles[i].color)      //loop to figure out the color of each tile
+ console.log(listOfObjTiles[i].color)      //loop to figure out the color of each tile
 
 }
 
-//issue #1 : if chossenn one of the found tiles, first or second choice. it changed both options to black,how to aoid the matched tile reverting to black
-//issue #2 : if choosing a found tile for both first and second choice,it resets the color
