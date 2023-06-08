@@ -1,5 +1,6 @@
 let colorsArr = ['red','green','yellow','blue','pink','brown','purple','orange']
-let listOfObjTiles = []  
+let listOfObjTiles = []
+let foundArr=[]  
 
 
 /*  after invoking giVeColor(), each element is a object in the listOfObjTiles
@@ -188,32 +189,27 @@ function giveColor(){
 }
 
 
-    const resetTiles = async () => { 
-            await delay(3000);
-            console.log("Waited 3s");
-            document.getElementById(firstTileID).style.backgroundColor = 'black'
-            document.getElementById(secondTileID).style.backgroundColor = 'black'
-                firstTile = null
-                secondTile = null
-                firstTileID = null
-                secondTileID = null
-                    // await delay(5000);             // console.log("Waited an additional 5s");
-    };
+const resetTiles = async () => { 
+    await delay(3000);
+    console.log("Waited 3s");
+    document.getElementById(firstTileID).style.backgroundColor = 'black'
+    document.getElementById(secondTileID).style.backgroundColor = 'black'
+    firstTile = null
+    secondTile = null
+    firstTileID = null
+    secondTileID = null
+}
 
-    const resetTile = async (ID) => { 
-        await delay(3000);
-        console.log("Waited 3s");
-       
-        document.getElementById(ID).style.backgroundColor = 'black'
-
-        
-        
-        
-            firstTile = null
-            secondTile = null
-            firstTileID = null
-            secondTileID = null
-                // await delay(5000);             // console.log("Waited an additional 5s");
+const resetTile = async (ID) => { 
+    await delay(3000);
+    console.log("Waited 3s");
+    
+    document.getElementById(ID).style.backgroundColor = 'black'
+    firstTile = null
+    secondTile = null
+    firstTileID = null
+    secondTileID = null
+    
 };
 
 const resetText = async () => { 
@@ -223,7 +219,7 @@ const resetText = async () => {
     document.getElementById('result').innerHTML = 'Do they match?'
 }
 
-const resetTry = async () => { 
+const resetTry = async () => {    //made to reset two choices without effecting tile color
     await delay(3000);
     firstTile = null
     secondTile = null
@@ -234,180 +230,106 @@ const resetTry = async () => {
 
 
 
-    giveColor()   //invokes function to assign each tile a color
-    coverTiles()  
+giveColor()   //invokes function to assign each tile a color
+coverTiles()  
 
 
      
-    pair0 = true;
-    console.log(pair0)
+pair0 = true;
+console.log(pair0)
      
     
-    for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a click function 
-        document.getElementById(listOfObjTiles[i].id).addEventListener('click',function(){
-            // console.log('clicked')
+for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a click function 
+    document.getElementById(listOfObjTiles[i].id).addEventListener('click',function(){
+    if (firstTile === null && secondTile === null ) {
+        document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
+        firstTile = listOfObjTiles[i].color;  
+        firstTileID = listOfObjTiles[i].id;
+        document.getElementById('caption').innerHTML = 'First Tile: ' + firstTile.toUpperCase()
+    
+    console.log(listOfObjTiles[i].color)
+    } 
+    else if(secondTile == null){
+    document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
+    secondTile = listOfObjTiles[i].color
+    secondTileID = listOfObjTiles[i].id
+    document.getElementById('caption2').innerHTML = "Second Tile: " + secondTile.toUpperCase() 
+
+    if(firstTileID === secondTileID){
+
+        if(listOfObjTiles[i].found == true) {
+            document.getElementById('caption2').innerHTML ='clicked on same tile twice that was found,try again'
+            document.getElementById('result').innerHTML = 'not matched,try again'
+            resetText()
+            resetTry()
+        }
+        else {
+            document.getElementById('caption2').innerHTML ='clicked on same tile twice,try again'
+            document.getElementById('result').innerHTML = 'not matched,try again'
+            resetTiles()
+            resetText()
+        }
             
-            // document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
-
-            // if(listOfObjTiles[i].found == true){
-            //     document.getElementById('result').innerHTML ='tile already found'
-            //     resetText();
-            //     resetTry();
-            // }
-
-
-            //check this if else statement first
-
-            if (firstTile === null && secondTile === null ) {
-                document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
-                document.getElementById(listOfObjTiles[i].id).innerHTML = " "
-                firstTile = listOfObjTiles[i].color;  
-                firstTileID = listOfObjTiles[i].id;
-
-                // if(listOfObjTiles[i].found == true){
-                //     document.getElementById('result').innerHTML ='tile already found'
-                //     document.getElementById('caption').innerHTML = 'you choose ' + firstTile + " as your first tile"
-                //     resetText();
-                //     resetTiles();
-                // } 
-                 document.getElementById('caption').innerHTML = 'First Tile: ' + firstTile.toUpperCase()
-                console.log(listOfObjTiles[i].color)
-
                 
-            } 
-                else if(secondTile == null){
-                document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
-                secondTile = listOfObjTiles[i].color
-                secondTileID = listOfObjTiles[i].id
-                document.getElementById('caption2').innerHTML = "Second Tile: " + secondTile.toUpperCase() 
-
-                if(firstTileID === secondTileID){
-
-                    if(listOfObjTiles[i].found == true) {
-                        document.getElementById('caption2').innerHTML ='clicked on same tile twice that was found,try again'
-                        document.getElementById('result').innerHTML = 'not matched,try again'
-                        resetText()
-                        resetTry()
-                    }
-                    else {
-                        document.getElementById('caption2').innerHTML ='clicked on same tile twice,try again'
-                        document.getElementById('result').innerHTML = 'not matched,try again'
-                        resetTiles()
-                        resetText()
-                    }
-                    
-                     
-                }
-                else if(firstTile != null && firstTile === secondTile && firstTileID !== secondTileID ){
-                    console.log("this is the index of your color " + colorsArr.indexOf(firstTile))
-                    
-                     document.getElementById('result').innerHTML ='match found'
-
-
-                     for (let j = 0;j<listOfObjTiles.length;j++){
-                        if (listOfObjTiles[j].color == firstTile){
-                          listOfObjTiles[j].found = true;
-                          console.log(listOfObjTiles[j])
-                        }
-                        
-
-                     }
-
-                     
-                    resetText()
-                    resetTry()
-                    // ++choiceCount create a new p element to store count
-                    
-                    // document.getElementById('result').innerHTML = choiceCount
-                    
-                } else  if (firstTile != null && secondTile != null && firstTile !== secondTile ) {
-                    console.log('wait for reset');
-                    console.log(secondTile)
-                    // ++choiceCount 
-                    
-
-                    document.getElementById('result').innerHTML = 'not matched,try again'
-
-                     
-                    resetText();
-                    //try to delay time before changing both tiles to black,maybe using a async function instead of hardcoding.passing in the tiles's ID as parameters
-
-                    resetTiles();
-                    // document.getElementById('result').innerHTML = choiceCount
-                }
-                else {
-
-                }
-                
-                
-            }
-
-         })  //end of eventlister click
-        
-        console.log(listOfObjTiles[i].color)      //loop to figure out the color of each tile
-        
     }
-
-    
-    
-
-
-    
-    //issue #1 : if chossenn one of the found tiles, first or second choice. it changed both options to black,how to aoid the matched tile reverting to black
-    //issue #2 : if choosing a found tile for both first and second choice,it resets the color
-
-    //  do{
+    else if(firstTile != null && firstTile === secondTile && firstTileID !== secondTileID ){
+        console.log("this is the index of your color " + colorsArr.indexOf(firstTile))
         
-    //     //print out make your first choice
-    //     if(choiceCount == 0){
-    //         break;
-    //     }
-    //     else if (choiceCount == 1){
+        document.getElementById('result').innerHTML ='match found'
+
+        for (let j = 0;j<listOfObjTiles.length;j++){
+            if (listOfObjTiles[j].color == firstTile){
+                listOfObjTiles[j].found = true;
+                foundArr.push(listOfObjTiles[j].id)
+                console.log(listOfObjTiles[j])
+            }
+        }  
+        resetText()
+        resetTry()
+           
             
-    //     }
-    //     else {
-    //         console.log('you made two choices')
-    //         break;
-    //     }
-
-
-    // } while(!gameDone)
-    
-        
-
-
-
-
-
-
-
-
-     
-
-     
-
-
-    // document.getElementById(listOfObjTiles[i].id).addEventListener('dblclick',function(){
-        //     console.log('clickedtwice')
-        //     document.getElementById(listOfObjTiles[i].id).style.backgroundColor = 'black'
+        } else  if (firstTile != null && secondTile != null && firstTile !== secondTile ) {
+            console.log('wait for reset');
+            console.log(secondTile)
+          
             
-        //  })
+            
+            document.getElementById('result').innerHTML = 'not matched,try again'
+            if(foundArr.includes(secondTileID) || foundArr.includes(firstTileID)){
+              for(let j = 0;j<listOfObjTiles.length;j++){
+                if(foundArr.includes(listOfObjTiles[j].id)){
+                    
+                }
+                else{
+                    resetTile(listOfObjTiles[j].id)
+                }
 
-
-    
-
-    //if not clicked then set to deafult{black} color
-
+              } 
+              resetText(); 
+            }
+            
+            else{
+               resetText();
+            
+            resetTiles(); 
+            }
+            
+                
+            
+            
+        }
+        else {
+            console.log('underworld')
+        }
         
-    //if clicked then expose tile color until the a second click is made on another tile.
+        
+        }
 
+    })  //end of eventlister click
 
+console.log(listOfObjTiles[i].color)      //loop to figure out the color of each tile
 
-/*
+}
 
-if both tiles do not have matching property value (which is the name of the color in a string)
-then invoke function that sets the color back to deafult.
-
-if tiles do match,then leave the expose color until all other tiles are exposed (boolean for exposed)
-
-*/
+//issue #1 : if chossenn one of the found tiles, first or second choice. it changed both options to black,how to aoid the matched tile reverting to black
+//issue #2 : if choosing a found tile for both first and second choice,it resets the color

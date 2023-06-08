@@ -23,16 +23,16 @@ div {
     width : 22%;
     display: inline-block;
     background-color: black;
-    height :20%;
+    height :17%;
     text-align: center;
     color :aquamarine;
     /* font-size: 125px; */
 
     
     /* margin-left: auto; */
-    margin : 5px 5px 5px 5px;
+    margin : 2px 1px;
    
-    
+    border-radius: 2%;
     border:solid 1px black;
    
 }
