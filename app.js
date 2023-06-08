@@ -68,7 +68,8 @@ function coverTiles(){
     for(let i =0; i < listOfObjTiles.length; i++){
         //  console.log(tiles[i].id)
          document.getElementById(listOfObjTiles[i].id).style.backgroundColor = 'black'  //set every card to deafult{black} color on load
-    }
+        //  document.getElementById(listOfObjTiles[i].id).innerHTML = "?"
+        }
 }
 
 
@@ -217,10 +218,9 @@ function giveColor(){
 
 const resetText = async () => { 
     await delay(3000);
-    document.getElementById('result').innerHTML = ''
-    document.getElementById('caption').innerHTML = " "
-    document.getElementById('caption2').innerHTML = " "
-    
+    document.getElementById('caption').innerHTML = "Select First Tile..."
+    document.getElementById('caption2').innerHTML = "Select Second Tile..."
+    document.getElementById('result').innerHTML = 'Do they match?'
 }
 
 const resetTry = async () => { 
@@ -260,6 +260,7 @@ const resetTry = async () => {
 
             if (firstTile === null && secondTile === null ) {
                 document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
+                document.getElementById(listOfObjTiles[i].id).innerHTML = " "
                 firstTile = listOfObjTiles[i].color;  
                 firstTileID = listOfObjTiles[i].id;
 
@@ -269,7 +270,7 @@ const resetTry = async () => {
                 //     resetText();
                 //     resetTiles();
                 // } 
-                 document.getElementById('caption').innerHTML = 'you choose ' + firstTile + " as your first tile"
+                 document.getElementById('caption').innerHTML = 'First Tile: ' + firstTile.toUpperCase()
                 console.log(listOfObjTiles[i].color)
 
                 
@@ -278,7 +279,7 @@ const resetTry = async () => {
                 document.getElementById(listOfObjTiles[i].id).style.backgroundColor = listOfObjTiles[i].color
                 secondTile = listOfObjTiles[i].color
                 secondTileID = listOfObjTiles[i].id
-                document.getElementById('caption2').innerHTML = 'you choose ' + secondTile + " as your second tile"
+                document.getElementById('caption2').innerHTML = "Second Tile: " + secondTile.toUpperCase() 
 
                 if(firstTileID === secondTileID){
 
@@ -352,8 +353,8 @@ const resetTry = async () => {
 
 
     
-    //issue #1 : if chossenn one of the matched tiles, first or second choice. it changed both options to black,how to aoid the matched tile reverting to black
-
+    //issue #1 : if chossenn one of the found tiles, first or second choice. it changed both options to black,how to aoid the matched tile reverting to black
+    //issue #2 : if choosing a found tile for both first and second choice,it resets the color
 
     //  do{
         

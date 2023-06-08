@@ -1,27 +1,37 @@
 body {
-    background-color:silver;
+    background-color:rgba(166, 191, 191, 0.633);
     height : 100vh;
     /* width:auto;
     max-width: 100%; */
+    text-align: center;
+}
+
+h1{
+    text-decoration: underline;
 }
 
 
-
-*{
+/* *{
     border: 1px solid black;
-}
+} */
 
 h1{
     text-align: center;
 }
 
 div {
-    width : 24%;
+    width : 22%;
     display: inline-block;
-    background-color: white;
-    height :22%;
+    background-color: black;
+    height :20%;
+    text-align: center;
+    color :aquamarine;
+    /* font-size: 125px; */
+
     
-    padding-left: 10px;
+    /* margin-left: auto; */
+    margin : 5px 5px 5px 5px;
+   
     
     border:solid 1px black;
    
