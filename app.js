@@ -13,7 +13,7 @@ let foundArr=[]
 */
 
 
-let gameDone = false
+let gameDone = 0
 
 let choiceCount = 0;
 
@@ -25,14 +25,6 @@ let secondTileID = null;
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-let pair0 = false
-let pair1 = false
-let pair2 = false
-let pair3 = false
-let pair4 = false
-let pair5 = false
-let pair6 = false
-let pair7 = false
 
 
 
@@ -274,18 +266,32 @@ for(let i = 0; i < listOfObjTiles.length; i++){   //this loop gives every tile a
     }
     else if(firstTile != null && firstTile === secondTile && firstTileID !== secondTileID ){
         console.log("this is the index of your color " + colorsArr.indexOf(firstTile))
-        
-        document.getElementById('result').innerHTML ='Result: Match Found!!'
+        if(foundArr.includes(firstTileID)){
+            document.getElementById('result').innerHTML ='Result: Match Found Already!!'
+            resetText()
+            resetTry()
+        }
+        else {
+            document.getElementById('result').innerHTML ='Result: Match Found!!'
 
-        for (let j = 0;j<listOfObjTiles.length;j++){
-            if (listOfObjTiles[j].color == firstTile){
+            for (let j = 0;j<listOfObjTiles.length;j++){
+                if (listOfObjTiles[j].color == firstTile){
                 listOfObjTiles[j].found = true;
                 foundArr.push(listOfObjTiles[j].id)
                 console.log(listOfObjTiles[j])
             }
-        }  
-        resetText()
-        resetTry()
+            } 
+            
+            resetTry()
+            gameDone++
+            if(gameDone >= 8){
+               document.getElementById('result').innerHTML = "YOU WIN!!"
+            }
+            else {resetText()}
+         
+        
+        }
+        
            
             
         } else  if (firstTile != null && secondTile != null && firstTile !== secondTile ) {
